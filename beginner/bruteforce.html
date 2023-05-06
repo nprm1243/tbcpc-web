@@ -169,7 +169,17 @@ pre code {
 <hr />
 <div id="giới-thiệu" class="section level3">
 <h3>Giới thiệu</h3>
-<p><strong>Duyệt trâu</strong> là một chiến thuật để giải quyết một bài toán dựa vào việc xét hết tất cả các trường hợp có thể xảy ra. Duyệt trâu có thể sử dụng để sử dụng một số dạng bài toán như sau:</p>
+<p><strong>Duyệt trâu</strong> là một chiến thuật để giải quyết một bài toán dựa vào việc xét hết tất cả các trường hợp có thể xảy ra theo yêu cầu bài toán. Để dễ hiểu hơn, ta sẽ xét một ví dụ đơn giản sau:</p>
+<blockquote>
+<p>Có một cây kim rơi trong đống rơm, hãy tìm một cách máy tính có thể thực hiện được để tìm lại cây kim đã mất</p>
+</blockquote>
+<p>Có lẽ, cách dễ nhất mà một máy tính có thể thực hiện được để tìm lại cây kim đã mất có thể được miêu tả như sau:</p>
+<pre><code>Bước 1: Lượm một &quot;cọng rơm&quot; lên
+Bước 2: Kiểm tra nếu &quot;cọng rơm&quot; nhặt được là cây kim (có ánh kim) thì đến bước 3, ngược lại quay lại bước 1
+Bước 3: Bỏ &quot;cọng rơm&quot; qua một bên, quay lại bước 1
+Bước 4: Báo cáo đã tìm được cây kim, kết thúc chương trình</code></pre>
+<p>Chiến thuật giải bài toán như trên được gọi là chiến thuật duyệt trâu, ta sẽ lần lượt xét từng cọng rơm một cho đến khi tìm được cây kim.</p>
+<p>Duyệt trâu có thể sử dụng để sử dụng một số dạng bài toán như sau:</p>
 <ul>
 <li>Bài toán đếm trường hợp</li>
 <li>Bài toán tìm đáp án tối ưu</li>
