@@ -288,8 +288,42 @@ Bước 4: Báo cáo đã tìm được cây kim, kết thúc chương trình</c
 <p>Ta có thể mô tả lại các bước làm bài toán trên như sau: đầu tiên ta chọn 1 <span class="math inline">\(=&gt;\)</span> ta còn <span class="math inline">\(\{2, 3\}\)</span>, tiếp theo ta chọn 2 <span class="math inline">\(=&gt;\)</span> ta được <code>1 2</code> và còn <span class="math inline">\(\{3\}\)</span>, tiếp theo ta chọn 3 và được kết quả là <code>1 2 3</code>. Sau đó ta quay lại bước phía trước, do đã chọn 2 rồi, ta chọn 3 từ tập <span class="math inline">\(\{2, 3\}\)</span> và được <code>1 3</code> còn <span class="math inline">\(\{2\}\)</span>. Cuối cùng ta chọn 2 để được <code>1 3 2</code>. Tiếp tục lặp lại các bước như trên ta sẽ được tất cả các hoán vị của <span class="math inline">\(\{1, 2, 3\}\)</span>.</p>
 <p><em>Hãy thử làm lại với <span class="math inline">\(n = 4, n=5\)</span></em>.</p>
 <p>Để sinh tất cả các hoán vị bậc <span class="math inline">\(n\)</span> của một tập hợp nào đó, ta sẽ sử dụng kỹ thuật quay lui (backtracking). Ý tưởng cơ bản của kỹ thuật quay lui như sau:</p>
-<p>Đặt <code>X</code> là một hoán vị. Ta sẽ:</p>
-<pre><code>- Xét tất cả giá trị có thể của X[1], với mỗi giá trị đó ta sẽ xét tất cả giá trị có thể của X[2] sao cho X[2] != X[1], với mỗi giá trị X[2] đã chọn được, ta xét tất cả giá trị có thể của X[3] sao cho X[3] != X[1], X[2].... ta tiếp tục xét cho đến X[n].</code></pre>
+<p>Đặt <code>X</code> là một hoán vị. Ta sẽ xét tất cả giá trị có thể của X[1], với mỗi giá trị đó ta sẽ xét tất cả giá trị có thể của X[2] sao cho X[2] != X[1], với mỗi giá trị X[2] đã chọn được, ta xét tất cả giá trị có thể của X[3] sao cho X[3] != X[1], X[2]…. ta tiếp tục xét cho đến X[n].</p>
+<p><strong>Mã giả</strong></p>
+<pre><code>Backtracking(k)
+    Nếu k == n+1 // Đã sinh ra được hoán vị n phần tử
+        In ra hoán vị
+        return
+    for(i trong tập A) 
+        if (chưa chọn i) 
+            X[k] = i
+            Đánh dấu đã chọn i
+            Backtracking(k+1)
+            Bỏ đánh dấu đã chọn i
+            X[k] = 0</code></pre>
+<p><strong>Code C++</strong></p>
+<pre class="cpp"><code>int n, hoanvi[10010], vis[10010];
+void backtracking(int k)
+{
+    if (k == n+1)
+    {
+        for (int i=1; i&lt;=n; i++) 
+            cout &lt;&lt; hoanvi[i] &lt;&lt; &quot; &quot;;
+        cout &lt;&lt; endl;
+        return;
+    }
+    for (int i=1; i&lt;=n; i++)
+    {
+        if (!vis[i])
+        {
+            vis[i] = 1;
+            hoanvi[k] = i;
+            backtracking(k+1);
+            vis[i] = 0;
+            hoanvi[k] = 0;
+        }
+    }
+}</code></pre>
 </div>
 </div>
 </div>
