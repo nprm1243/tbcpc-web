@@ -275,9 +275,9 @@ Bước 4: Báo cáo đã tìm được cây kim, kết thúc chương trình</c
 <div id="sinh-tất-cả-hoán-vị" class="section level4">
 <h4>Sinh tất cả hoán vị</h4>
 <p>Ta sẽ xét bài toán sau:</p>
-<blockquote>
+<hr />
 <p>Sinh tất cả hoán vị của <span class="math inline">\(n\)</span> số nguyên dương đầu tiên</p>
-</blockquote>
+<hr />
 <p>Trước tiên ta sẽ làm bài toán trên theo cách “thủ công”, giả sử <span class="math inline">\(n = 3\)</span> thì ta có các hoán vị có thể được liệt kê như sau:</p>
 <pre><code>1 2 3
 1 3 2
@@ -323,6 +323,97 @@ void backtracking(int k)
             hoanvi[k] = 0;
         }
     }
+}</code></pre>
+<p>Độ phức tạp thuật toán: <span class="math inline">\(O(n^n)\)</span></p>
+</div>
+<div id="sinh-tất-cả-các-trạng-thái" class="section level4">
+<h4>Sinh tất cả các trạng thái</h4>
+<p>Trước hết ta sẽ bàn đến trạng thái là gì. Hãy cùng xét bài toán sau:</p>
+<hr />
+<p>Cho một mảng <span class="math inline">\(A\)</span> có <span class="math inline">\(n\)</span> phần tử, hãy kiểm tra có tồn tại tập con của <span class="math inline">\(A\)</span> có tổng là <span class="math inline">\(k\)</span> hay không.</p>
+<hr />
+<p>Một cách tự nhiên, ta sẽ nghĩ đến việc kiểm tra tất cả tập con của mảng <span class="math inline">\(A\)</span>. Hãy lấy một tập <span class="math inline">\(A = \{a, b, c\}\)</span> làm ví dụ, ta sẽ có tập con của tập <span class="math inline">\(A\)</span> là: <span class="math inline">\(\{a\}, \{b\}, \{c\}, \{a, b\}, \{a, c\}, \{b, c\}, \{a, b, c\}\)</span>.</p>
+<p>Ta có thể tạo ra một bảng như sau:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">a</th>
+<th align="center">b</th>
+<th align="center">c</th>
+<th align="center">Tập con</th>
+<th align="center">Giá trị</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">{c}</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">{b}</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">{b, c}</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">{a}</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">{a, c}</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">{a, b}</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">{a, b, c}</td>
+<td align="center">7</td>
+</tr>
+</tbody>
+</table>
+<p>Trong đó cột giá trị là giá trị ở hệ thập phân của các số ở hệ nhị phân được ghép lại từ ba cột <span class="math inline">\(a, b, c\)</span>, ví dụ <span class="math inline">\(101_2 = 5_{10}\)</span>.</p>
+<p>Ta nhận thấy để duyệt tất cả các tập con (từ giờ sẽ gọi là trạng thái) của <span class="math inline">\(A\)</span>, ta chỉ cần duyệt các số từ <span class="math inline">\(1\)</span> đến <span class="math inline">\(2^n-1\)</span> (ví dụ ở trên là từ <span class="math inline">\(1\)</span> đến <span class="math inline">\(2^3-1=7\)</span>). Với mỗi số ta chuyển chúng sang hệ nhị phân để thu được tập con tương ứng.</p>
+<p><strong>Mã giả</strong></p>
+<pre><code>duyệt i từ 1 đến 2^n-1
+    đặt: number = i
+    while (number != 0)
+        nếu (number mod 2 == 1) in ra A[i] (trên cùng dòng)
+        number = number div 2</code></pre>
+<p><strong>Code C++</strong></p>
+<pre class="cpp"><code>for (int i=1; i&lt;=(1 &lt;&lt; n)-1; i++)
+{
+    int number = i;
+    while(number)
+    {
+        if (number % 2 == 1) cout &lt;&lt; A[i] &lt;&lt; &quot; &quot;;
+        number /= 2;
+    }
+    cout &lt;&lt; endl;
 }</code></pre>
 </div>
 </div>
